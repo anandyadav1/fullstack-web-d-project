@@ -23,8 +23,8 @@ const listingsRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
+// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
 main()
     .then(() => {
@@ -33,8 +33,8 @@ main()
         console.log(err);
     });
 async function main() {
-    // await mongoose.connect(MONGO_URL);
     await mongoose.connect(dbUrl);
+    // await mongoose.connect(MONGO_URL);
 }
 
 
@@ -46,10 +46,13 @@ app.engine("ejs", ejsMate);
 //It is use for styling
 app.use(express.static(path.join(__dirname, "/public")));
 
+
+//For store online
+
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     crypto: {
-        secret: process.env.SECRET,
+        secret:  process.env.SECRET,
     },
     touchAfter: 24 * 3600,
 });
@@ -58,8 +61,11 @@ store.on("error", () => {
     console.log("ERROR in MONGO SESSION STORE", err);
 });
 
+
+
+
 const sessionOptions = {
-    store,
+    // store,
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
