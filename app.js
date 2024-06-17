@@ -33,8 +33,8 @@ main()
         console.log(err);
     });
 async function main() {
-    await mongoose.connect(dbUrl);
     // await mongoose.connect(MONGO_URL);
+    await mongoose.connect(dbUrl);
 }
 
 
