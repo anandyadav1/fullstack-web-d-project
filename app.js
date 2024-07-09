@@ -2,7 +2,6 @@ if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
 }
 
-
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -60,8 +59,6 @@ const store = MongoStore.create({
 store.on("error", () => {
     console.log("ERROR in MONGO SESSION STORE", err);
 });
-
-
 
 
 const sessionOptions = {
